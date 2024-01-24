@@ -1,73 +1,72 @@
 import { useState } from "react";
 
 export default function App() {
-  return (
-    <div>
-      <TextExpander>
-        Space travel is the ultimate adventure! Imagine soaring past the stars
-        and exploring new worlds. It's the stuff of dreams and science fiction,
-        but believe it or not, space travel is a real thing. Humans and robots
-        are constantly venturing out into the cosmos to uncover its secrets and
-        push the boundaries of what's possible.
-      </TextExpander>
+	return (
+		<div>
+			<TextExpander>
+				Space travel is the ultimate adventure! Imagine soaring past the
+				stars and exploring new worlds. It's the stuff of dreams and
+				science fiction, but believe it or not, space travel is a real
+				thing. Humans and robots are constantly venturing out into the
+				cosmos to uncover its secrets and push the boundaries of what's
+				possible.
+			</TextExpander>
 
-      <TextExpander
-        collapsedNumWords={20}
-        expandButtonText="Show text"
-        collapseButtonText="Collapse text"
-        buttonColor="#ff6622"
-      >
-        Space travel requires some seriously amazing technology and
-        collaboration between countries, private companies, and international
-        space organizations. And while it's not always easy (or cheap), the
-        results are out of this world. Think about the first time humans stepped
-        foot on the moon or when rovers were sent to roam around on Mars.
-      </TextExpander>
+			<TextExpander
+				collapsedNumWords={20}
+				expandButtonText="Show text"
+				collapseButtonText="Collapse text"
+				buttonColor="#ff6622"
+			>
+				Space travel requires some seriously amazing technology and
+				collaboration between countries, private companies, and
+				international space organizations. And while it's not always
+				easy (or cheap), the results are out of this world. Think about
+				the first time humans stepped foot on the moon or when rovers
+				were sent to roam around on Mars.
+			</TextExpander>
 
-      <TextExpander expanded={true} className="box">
-        Space missions have given us incredible insights into our universe and
-        have inspired future generations to keep reaching for the stars. Space
-        travel is a pretty cool thing to think about. Who knows what we'll
-        discover next!
-      </TextExpander>
-    </div>
-  );
+			<TextExpander expanded={true} className="box">
+				Space missions have given us incredible insights into our
+				universe and have inspired future generations to keep reaching
+				for the stars. Space travel is a pretty cool thing to think
+				about. Who knows what we'll discover next!
+			</TextExpander>
+		</div>
+	);
 }
 
 function TextExpander({
-  collapsedNumWords = 35,
-  expandButtonText = "Show more",
-  collapseButtonText = "Show less",
-  buttonColor = "blue",
-  expanded = false,
-  className,
-  children,
+	collapsedNumWords = 35,
+	expandButtonText = "Show more",
+	collapseButtonText = "Show less",
+	buttonColor = "blue",
+	expanded = false,
+	className,
+	children,
 }) {
-  const [isExpanded, setIsExpanded] = useState(expanded);
-  const totalWordsArr = children.split(" ");
+	const [isExpanded, setIsExpanded] = useState(expanded);
+	const displayText =
+		children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
+	// JS technique I just learned
 
-  const buttonStyle = {
-    backgroundColor: "transparent",
-    border: "none",
-    textDecoration: "underline",
-    color: buttonColor,
-    cursor: "pointer",
-  };
+	const buttonStyle = {
+		backgroundColor: "transparent",
+		border: "none",
+		textDecoration: "underline",
+		color: buttonColor,
+		cursor: "pointer",
+	};
 
-  return (
-    <div className={className}>
-      <span>
-        {totalWordsArr.map((word, index) =>
-          isExpanded
-            ? word + " "
-            : index < collapsedNumWords
-            ? word + " "
-            : index === collapsedNumWords && "..."
-        )}
-      </span>
-      <button style={buttonStyle} onClick={() => setIsExpanded(!isExpanded)}>
-        {isExpanded ? collapseButtonText : expandButtonText}
-      </button>
-    </div>
-  );
+	return (
+		<div className={className}>
+			<span>{isExpanded ? children : displayText}</span>
+			<button
+				style={buttonStyle}
+				onClick={() => setIsExpanded(!isExpanded)}
+			>
+				{isExpanded ? collapseButtonText : expandButtonText}
+			</button>
+		</div>
+	);
 }
