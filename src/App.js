@@ -37,7 +37,7 @@ export default function App() {
 }
 
 function TextExpander({
-	collapsedNumWords = 35,
+	collapsedNumWords = 10,
 	expandButtonText = "Show more",
 	collapseButtonText = "Show less",
 	buttonColor = "blue",
@@ -51,9 +51,11 @@ function TextExpander({
 	// JS technique I just learned
 
 	const buttonStyle = {
-		backgroundColor: "transparent",
+		background: "none",
 		border: "none",
+        marginLeft: "6px",
 		textDecoration: "underline",
+        font: "inherit",
 		color: buttonColor,
 		cursor: "pointer",
 	};
